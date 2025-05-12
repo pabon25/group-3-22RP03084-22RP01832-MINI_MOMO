@@ -81,7 +81,7 @@ class Menu {
                     
                     // Send welcome SMS
                     $sms = new Sms($this->phoneNumber);
-                    $welcomeMsg = "Welcome to XYZ MOMO, $name! Your account is ready with ".Util::formatAmount(Util::USER_BALANCE)." balance.";
+                    $welcomeMsg = "Welcome to MOMO, $name! Your account is ready with ".Util::formatAmount(Util::USER_BALANCE)." balance.";
                     $sms->sendSMS($welcomeMsg, $this->phoneNumber);
                     
                     echo "END Registration successful. Welcome $name!";
@@ -230,7 +230,7 @@ class Menu {
                 echo "END Agent not found";
                 return;
             }
-
+    
             $totalAmount = $amount + Util::TRANSACTION_FEE;
             if(!$this->hasSufficientBalance($this->phoneNumber, $totalAmount)) {
                 echo "END Insufficient balance (Fee: ".Util::TRANSACTION_FEE.")";
