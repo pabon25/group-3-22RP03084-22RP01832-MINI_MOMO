@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 12, 2025 at 11:52 AM
+-- Generation Time: May 12, 2025 at 02:37 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,6 +24,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `admin_users`
+--
+
+CREATE TABLE `admin_users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password_hash` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `last_login` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `admin_users`
+--
+
+INSERT INTO `admin_users` (`id`, `username`, `password_hash`, `created_at`, `last_login`) VALUES
+(2, 'admin', '$2y$10$.G6I41YabWJfw4ZvFrRIKedM/hyFsbWKzM8saD51RTbhklRhUg1CS', '2025-05-12 11:43:36', '2025-05-12 12:18:43');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `agents`
 --
 
@@ -34,7 +55,7 @@ CREATE TABLE `agents` (
   `full_name` varchar(255) DEFAULT NULL,
   `pin_hash` varchar(255) DEFAULT NULL,
   `approved` tinyint(1) DEFAULT 0,
-  `balance` decimal(10,2) DEFAULT 0.00,
+  `balance` decimal(10,2) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -43,8 +64,8 @@ CREATE TABLE `agents` (
 --
 
 INSERT INTO `agents` (`id`, `agent_code`, `phone_number`, `full_name`, `pin_hash`, `approved`, `balance`, `created_at`) VALUES
-(1, 'Cris', '+250793341420', 'Kwihangana Lullaby', '$2y$10$dimxHDPJl4R3kI6XRB/cUuaphYLODBizNV2RJnuZ.VEi9rrEnkRoG', 1, 50.00, '2025-04-30 21:56:54'),
-(2, 'THEO', '0788836616', 'max', '$2y$10$SfsDGM1SjPWFsDLarFH7WOTw0CCeQE6dJgqugKxfGR9Fi5EdvL5Eq', 1, 0.00, '2025-05-12 08:43:49');
+(10, 'PAX', '+250792359800', 'MASENGESHO Pacifique', '$2y$10$LdR2PoV14gbrRYm4gbSLdOd4ZYKqxKUqbBFet9x6RXFgEkMmiU7dq', 1, 50050.00, '2025-05-12 11:23:16'),
+(11, 'THEO', '+250788836616', 'ISHIMWE Theogene', '$2y$10$uu/GVbmxzr6yzn2gQHQh4OLxjcn73oAJwYnJYt5lOg.24S.jBDKwC', 1, 70000.00, '2025-05-12 11:24:03');
 
 -- --------------------------------------------------------
 
@@ -64,31 +85,18 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`session_id`, `phone_number`, `menu_state`, `created_at`) VALUES
-('1', '0790222440', '', '2025-04-30 21:29:42'),
-('1d', '+250790222440', '1', '2025-05-03 19:46:22'),
-('A1', '0790222440', '', '2025-04-30 21:29:26'),
-('ATUid_03849b09b6468e63fa0ff0c2747737f2', '+250790222449', '', '2025-04-30 21:36:43'),
-('ATUid_05d2a833c8090ddd0df08ed4a11e9e87', '+250790222441', '3*1234', '2025-05-03 19:51:17'),
-('ATUid_09e02963210e3c7e7d0da91766caa157', '+250792453617', '1', '2025-05-12 09:39:22'),
-('ATUid_09f14011f52465df129707ef84a81b0b', '+250790222441', '1*+250792359800*200*1234*1', '2025-05-03 19:51:33'),
-('ATUid_09f7adc64086b7a8ca67444d2793ea6e', '+250790222440', '', '2025-04-30 21:35:59'),
-('ATUid_12d559dd4e83f5eca26bdc6eb631f7e6', '+250793341420', '2*1234', '2025-04-30 22:03:51'),
-('ATUid_253df0e5393a73f3d8b5417ca255eefd', '+250792453617', '1*+250790222440*200*1234', '2025-05-12 09:34:37'),
-('ATUid_2a3a87a66df0ab6d34a7576015903100', '+250793341420', '2*1234', '2025-04-30 22:06:16'),
-('ATUid_341ab620270ee7fc25126e64c7f21b58', '+250792453617', '3*1234', '2025-05-12 09:39:36'),
-('ATUid_377fd8989b5798d38763eb838e7e189d', '+250793341420', '2*1234', '2025-04-30 22:03:36'),
-('ATUid_45dca39e710feaf6729535b9db8d0c5f', '+250790222441', '1*+250790222440', '2025-05-03 19:48:33'),
-('ATUid_5b9a82fe95dd54f8352437ba84b4088c', '+250792453617', '3*1234', '2025-05-12 09:39:49'),
-('ATUid_5d4ddadc720a5e7a03b351ab9c86cfed', '+250793341420', '', '2025-04-30 22:00:14'),
-('ATUid_81bd78c5c9f3d380902f278e157f8048', '+250793341420', '', '2025-04-30 21:59:22'),
-('ATUid_977b8b9e8693f26bdd5d30ddd5533f7b', '+250793341420', '4', '2025-04-30 22:30:28'),
-('ATUid_9b018e84adcbd815586f1437c0e45dfa', '+250793341420', '1', '2025-04-30 22:06:05'),
-('ATUid_9c71f576cb5bf86817eae31879df72b0', '+250793341420', '1*98*2*1234', '2025-04-30 22:29:40'),
-('ATUid_9fcad255e330c65f1202661fc79c9cb7', '+250792453617', '1*+250790222440*200*1234*1', '2025-05-12 09:35:43'),
-('ATUid_a368aa846bbcd4d347f092de38ea393b', '+250792453617', '3*1234', '2025-05-12 09:39:04'),
-('ATUid_bfdc5ed38527df7c68820d53bafc35bc', '+250792453617', '1*pax*1234*1234', '2025-05-12 09:33:23'),
+('ATUid_0123c622c68f72a4ac52666e46c51609', '+250788836616', '', '2025-05-12 12:28:51'),
+('ATUid_2e4fd0e24c12ce6c9ec6bf8fd2d48eb1', '+250788790877', '2*50000*PAX*1234', '2025-05-12 12:26:24'),
+('ATUid_7924140dccc16c8c43702710ec30b549', '+250788790877', '2', '2025-05-12 12:25:51'),
+('ATUid_ac8697a9507d698666c5caf8f918641c', '+250788836616', '1*TX-6821e90e49bdb*1', '2025-05-12 12:27:55'),
+('ATUid_b59e9c7f7d7f61be5a2918779168fd2e', '+250783672819', '1*Elias*1234*1234', '2025-05-12 12:21:04'),
+('ATUid_b70736198f509f4892158f38fad283b4', '+250788790877', '1*+250783672819*200*1234*1', '2025-05-12 12:24:03'),
+('ATUid_bb0f9d3347fd84793da8b492c1ffbb9d', '+250788790877', '1*Mathias*1234*1234', '2025-05-12 12:23:29'),
 ('ATUid_c02ab45cf1ddff35995b8ec5613207de', '+250792453617', '3*1234', '2025-05-12 09:33:52'),
+('ATUid_d74d79a7f8161058f79ee9f9cf374dfa', '+250792359800', '', '2025-05-12 10:19:08'),
+('ATUid_e18767c58c65158ce254f8726b86f51e', '+250783672819', '1*Elias Ndiho*1234', '2025-05-12 12:20:24'),
 ('ATUid_e929de2e111637dcc56b6a10dd875578', '+250793341420', '1*TX-68129cecdb4d0*1', '2025-04-30 22:01:08'),
+('ATUid_f1fc8e18dd5facd484e66c79ab346876', '+250792359800', '1*TX-6821e90e49bdb*1', '2025-05-12 12:29:34'),
 ('ATUid_f21b702c6078bec7e6f6ccb42781b6af', '+250793341420', '3', '2025-04-30 22:03:27');
 
 -- --------------------------------------------------------
@@ -114,10 +122,8 @@ CREATE TABLE `transactions` (
 --
 
 INSERT INTO `transactions` (`id`, `reference`, `user_phone`, `agent_code`, `amount`, `type`, `status`, `fee`, `created_at`) VALUES
-(1, 'TX-681298dac28fd', '+250792359800', NULL, 200.00, 'send', 'completed', 100.00, '2025-04-30 21:40:42'),
-(2, 'TX-68129cecdb4d0', '+250790222440', 'Cris', 200.00, 'withdraw', 'completed', 100.00, '2025-04-30 21:58:04'),
-(3, 'TX-681673ebe44a7', '+250790222441', NULL, 200.00, 'send', 'completed', 100.00, '2025-05-03 19:52:11'),
-(4, 'TX-6821c108958c1', '+250792453617', NULL, 200.00, 'send', 'completed', 100.00, '2025-05-12 09:36:08');
+(5, 'TX-6821e88caa6ef', '+250788790877', NULL, 200.00, 'send', 'completed', 100.00, '2025-05-12 12:24:44'),
+(6, 'TX-6821e90e49bdb', '+250788790877', 'PAX', 50000.00, 'withdraw', 'completed', 100.00, '2025-05-12 12:26:54');
 
 -- --------------------------------------------------------
 
@@ -139,14 +145,19 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `phone_number`, `full_name`, `pin_hash`, `balance`, `created_at`) VALUES
-(1, '+250790222440', 'Paccy', '$2y$10$.5G3LCr/wWEv4s64Zo83.O7QLcDimaBHgLquuuKHkuUUwRnZkXFTe', 500.00, '2025-04-30 21:33:55'),
-(2, '+250792359800', 'Pax', '$2y$10$kAsn/tYeigT4hzjU80KuW.8LrsBR6Gy/vOCj.Y2fYFRLaIbxyL.Tq', 400.00, '2025-04-30 21:39:22'),
-(3, '+250790222441', 'MASENGESHO Pacifique', '$2y$10$h.AUUr1wWwKC37OsRogXBO5vHonvdbG.DlMJOtniG5i62vPxkfs.G', 100.00, '2025-05-03 19:47:05'),
-(4, '+250792453617', 'pax', '$2y$10$HtA7agkXTK5rhDkWaFGjsOwwYUFonDQJmdTENUCnzv4z0SWq6rgAe', 100.00, '2025-05-12 09:33:43');
+(5, '+250783672819', 'Elias', '$2y$10$8vy3L2e.JJQFURqxlUOL3eSX1jd4gjKR0S0SpveJ.FwRf/i3y/Ob.', 600.00, '2025-05-12 12:21:32'),
+(6, '+250788790877', 'Mathias', '$2y$10$SPRexWASBWYqXYbL5.9B9.GKPX7WpMgL9hsiGm9KbIFm0FboLbQIy', 49900.00, '2025-05-12 12:23:49');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admin_users`
+--
+ALTER TABLE `admin_users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- Indexes for table `agents`
@@ -181,22 +192,28 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `admin_users`
+--
+ALTER TABLE `admin_users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `agents`
 --
 ALTER TABLE `agents`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
