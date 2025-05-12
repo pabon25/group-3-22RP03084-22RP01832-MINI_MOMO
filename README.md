@@ -1,4 +1,9 @@
 
+## 👨‍💻 Developers
+- MASENGESHO Pacifique - 22RP03084
+- MBONIMPA ISHIMWE Theogene - 22RP01832
+
+---
 # 📱 MINI_MOMO – Mobile Money Simulation System
 
 **MINI_MOMO** is a PHP-based mobile money simulation system that mimics core functionalities of Mobile Money (MoMo) transactions. It supports user and agent roles, balance management, secure transfers, and transaction history — all enhanced with simulated SMS notifications via Africa’s Talking.
@@ -99,12 +104,6 @@ __Admin/
 ── vendor/                  # Composer dependencies
 └─ README.md                # This file
 ```
-
-## 👨‍💻 Authors
-- MASENGESHO Pacifique - 22RP03084
-- MBONIMPA ISHIMWE Theogene - 22RP01832
-
----
 
 ## 📜 License
 This project is for educational purposes.
