@@ -8,7 +8,7 @@
 
 ### ✅ 1. Clone the Project
 ```bash
-git clone https://github.com/your-username/group-3-22RP03084-22RP01832-MINI_MOMO.git
+git clone https://github.com/pabon25/group-3-22RP03084-22RP01832-MINI_MOMO.git
 ```
 
 ### ✅ 2. Move to XAMPP's `htdocs`
