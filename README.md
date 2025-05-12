@@ -1,10 +1,24 @@
 
+# 📱 MINI_MOMO – Mobile Money Simulation System
+
+**MINI_MOMO** is a PHP-based mobile money simulation system that mimics core functionalities of Mobile Money (MoMo) transactions. It supports user and agent roles, balance management, secure transfers, and transaction history — all enhanced with simulated SMS notifications via Africa’s Talking.
+
+---
+
+## 🖥️ Requirements
+
+- **XAMPP** (Apache + MySQL + PHP)  
+- **Composer** (for dependency management)  
+- **NGROK** (to expose your local server to the internet)  
+- **Africa’s Talking** account & credentials  
+
+---
+
 ## ⚙️ Setup Instructions
 
-### ✅ 1. Clone the Project
+### 1. Clone the Project
 ```bash
 git clone https://github.com/pabon25/group-3-22RP03084-22RP01832-MINI_MOMO.git
-```
 
 ### ✅ 2. Move to XAMPP's `htdocs`
 ```bash
@@ -20,17 +34,19 @@ cd C:/xampp/htdocs/momo
 composer update
 ```
 
-### ✅ 4. Import the Database
-1. Open [http://localhost/phpmyadmin](http://localhost/phpmyadmin)
-2. Create a new database named `momo`
-3. Go to **Import**
-4. Choose the file: `DB/momo.sql`
-5. Click **Go**
+> **Default Admin Account**  
+> After import, a default admin user is created:
+> - **Username:** `admin`  
+> - **Password:** `admin123`  
+
 
 ### ✅ 5. Update DB Connection
-Edit `connect.php` to match your database settings:
+Edit `util.php` to match your database settings:
 ```php
-$conn = new mysqli("localhost", "root", "", "momo");
+    const HOST = "localhost";
+    const DBNAME = "momo";
+    const USERNAME = "root";
+    const PASSWORD = "";
 ```
 
 ### ✅ 6. Start the Application
@@ -38,12 +54,6 @@ $conn = new mysqli("localhost", "root", "", "momo");
 - Visit [http://localhost/momo](http://localhost/momo)
 
 ---
-# 📱 MINI_MOMO - Mobile Money Simulation System
-
-**MINI_MOMO** is a PHP-based mobile money simulation system that mimics core functionalities of Mobile Money (MoMo) transactions. It supports user and agent roles, balance management, secure transfers, and transaction history — all enhanced with simulated SMS notifications.
-
----
-
 ## 🚀 Features
 
 ### 👤 User & Agent Accounts
@@ -75,21 +85,19 @@ $conn = new mysqli("localhost", "root", "", "momo");
 
 ```
 momo/
-├── Sms.php                  # Simulates SMS sending
-├── connect.php              # Database connection setup
-├── register.php             # New user/agent registration
-├── login.php                # Login page
-├── send.php                 # Transfer money interface
-├── transactions.php         # Transaction history display
-├── logout.php               # End session
-├── menu.php                 # Dashboard after login
-├── DB/
-│   └── mini_momo.sql        # SQL database file
-├── vendor/                  # Composer dependencies
-└── README.md                # This file
+── Sms.php                  # Simulates SMS sending
+── connect.php              # Database connection setup
+── register.php             # New user/agent registration
+── login.php                # Login page
+── send.php                 # Transfer money interface
+── transactions.php         # Transaction history display
+── logout.php               # End session
+── menu.php                 # Dashboard after login
+── DB/
+   └── mini_momo.sql        # SQL database file
+── vendor/                  # Composer dependencies
+└─ README.md                # This file
 ```
-
----
 
 ## 👨‍💻 Authors
 - MASENGESHO Pacifique - 22RP03084
