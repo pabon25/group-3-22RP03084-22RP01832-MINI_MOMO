@@ -8,13 +8,40 @@ if(isset($_SESSION['admin_logged_in'])) {
 }
 
 $error = '';
+$util = new Util();
+$pdo = $util->getConnection();
+
+// Create default admin if not exists
+$stmt = $pdo->query("SELECT COUNT(*) FROM admin_users");
+if($stmt->fetchColumn() == 0) {
+    $defaultPassword = 'admin123';
+    $stmt = $pdo->prepare("
+        INSERT INTO admin_users (username, password_hash) 
+        VALUES (?, ?)
+    ");
+    $stmt->execute([
+        'admin', 
+        password_hash($defaultPassword, PASSWORD_DEFAULT)
+    ]);
+}
+
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
     
-    // Simple hardcoded admin credentials (replace with proper auth)
-    if($username === 'admin' && $password === 'admin123') {
+    // Get admin user from database
+    $stmt = $pdo->prepare("SELECT * FROM admin_users WHERE username = ?");
+    $stmt->execute([$username]);
+    $admin = $stmt->fetch();
+    
+    if($admin && password_verify($password, $admin['password_hash'])) {
         $_SESSION['admin_logged_in'] = true;
+        $_SESSION['admin_username'] = $admin['username'];
+        
+        // Update last login
+        $stmt = $pdo->prepare("UPDATE admin_users SET last_login = NOW() WHERE id = ?");
+        $stmt->execute([$admin['id']]);
+        
         header('Location: index.php');
         exit;
     } else {
@@ -22,34 +49,55 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Admin Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; }
-        .login-form { width: 300px; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
-        .form-group { margin-bottom: 15px; }
-        input { width: 100%; padding: 8px; box-sizing: border-box; }
-        button { width: 100%; padding: 10px; background-color: #4CAF50; color: white; border: none; }
-        .error { color: red; }
+        body {
+            background-color: #f8f9fa;
+        }
+        .login-container {
+            max-width: 400px;
+            margin: 60px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.1);
+        }
+        .btn-login {
+            background-color: #4CAF50;
+            border: none;
+        }
+        .btn-login:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
-    <div class="login-form">
-        <h2>Admin Login</h2>
-        <?php if($error): ?>
-            <p class="error"><?= $error ?></p>
-        <?php endif; ?>
-        <form method="POST">
-            <div class="form-group">
-                <input type="text" name="username" placeholder="Username" required>
-            </div>
-            <div class="form-group">
-                <input type="password" name="password" placeholder="Password" required>
-            </div>
-            <button type="submit">Login</button>
-        </form>
-    </div>
+
+<div class="login-container">
+    <h2 class="mb-4 text-center">XYZ Admin Login</h2>
+
+    <?php if ($error): ?>
+        <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
+    <?php endif; ?>
+
+    <form method="POST" action="">
+        <div class="mb-3">
+            <label class="form-label">Username</label>
+            <input type="text" name="username" class="form-control" required autofocus>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-login w-100 text-white">Login</button>
+    </form>
+</div>
+
 </body>
 </html>
