@@ -27,9 +27,9 @@ composer update
 
 ### ✅ 4. Import the Database
 1. Open [http://localhost/phpmyadmin](http://localhost/phpmyadmin)
-2. Create a new database named `mini_momo`
+2. Create a new database named `momo`
 3. Go to **Import**
-4. Choose the file: `DB/mini_momo.sql`
+4. Choose the file: `DB/momo.sql`
 5. Click **Go**
 
 ### ✅ 5. Update DB Connection
