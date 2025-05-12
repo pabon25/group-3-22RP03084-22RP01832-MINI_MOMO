@@ -76,23 +76,24 @@ Edit `util.php` to match your database settings:
 - Details include time, amount, type, and updated balance
 
 ### 🧑‍💼 Agent Features
-- Agents function like users but can be extended for cash-in/cash-out
 - View and manage own transactions
+- Approve Withdraw of User
 
 ---
 
 ## 📁 Project Structure
 
 ```
+
 momo/
+__Admin/
+   ── login.php                # Login page
+   ── logout.php               # End session
+   __index.php                 #Admin Dashboard
 ── Sms.php                  # Simulates SMS sending
-── connect.php              # Database connection setup
-── register.php             # New user/agent registration
-── login.php                # Login page
-── send.php                 # Transfer money interface
-── transactions.php         # Transaction history display
-── logout.php               # End session
 ── menu.php                 # Dashboard after login
+──Util                      #Contains Unchangeable values
+──index.php                 #Contains Objects corrected to make functionality (it is one to be used to access Our USSD Application)
 ── DB/
    └── mini_momo.sql        # SQL database file
 ── vendor/                  # Composer dependencies
