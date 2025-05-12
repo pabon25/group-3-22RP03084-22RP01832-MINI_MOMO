@@ -26,7 +26,7 @@ class Menu {
         ");
         $stmt->execute([$this->sessionId, $this->phoneNumber, $this->text, $this->text]);
     }
-
+    
     public function isRegistered() {
         $stmt = $this->pdo->prepare("SELECT id FROM users WHERE phone_number = ?");
         $stmt->execute([$this->phoneNumber]);
